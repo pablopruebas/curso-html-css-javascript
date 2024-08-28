@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/estilos.css">
+    <title>Masterdots game</title>
+</head>
+<body>
+    <!--CABECERA-->
+    <header>
+        <img src="./img/logo.png" alt="Logo MasterDots">
+    </header>
+    <!--FORMULARIO DE LA PAGINA-->
+    <main>
+        <div>
+            <p id="error"></p>
+        </div>
+        <form action="./juego.html" id="formEntrada">
+            <div class="itemform">
+                <label for="nick">Introduce tu nick*</label>
+                <input type="text" name="nick" value="@" id="nicka" readonly>
+                <input type="text" name="nick" id="nick" required minlength="2">
+            </div>
+            <div class="itemform">
+                <label for="email">correo electrónico</label>
+                <input type="email" id="email" value="yo@iam.es">
+            </div>
+            <div class="itemform">
+                <label for="tamano">Tamaño del juego*</label>
+                <select name="tamano" id="tamano" required>
+                    <option value="0">--Por favor, elige un tamaño--</option>
+                    <option value="1">4x4</option>
+                    <option value="2">5x5</option>
+                    <option value="3">6x6</option>
+                </select>
+            </div>
+            <div class="itemform">
+                <p>* Obligatorio</p>
+            </div>
+            <div class="itemform">
+                <input type="submit" value="JUGAR" id="jugar">
+            </div>
+
+        </form>
+    </main>
+    <!--PIE DE PAGINA-->
+    <footer>
+        <p>Curso FrontEnd HTML, CSS y Js.</p>
+    </footer>
+    <!--CODIGO JS-->
+    <script src="./js/datosUsuario.js"></script>
+    <script src="./js/app.js" defer></script>
+</body>
+</html>
