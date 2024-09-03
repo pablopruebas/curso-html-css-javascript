@@ -1,4 +1,6 @@
-//Inicializacion de var, objetos y DOM
+/**
+ * Documento js donde captamos el evento submit tras rellenar el formulario, con el cual cambiamos de página
+ */
 
 const nickInput = document.getElementById('nick');
 const tamanoInput = document.getElementById('tamano');
