@@ -2,6 +2,7 @@
 
 const nickInput = document.getElementById('nick');
 const tamanoInput = document.getElementById('tamano');
+const emailInput = document.getElementById('email');
 const formEntrada = document.getElementById('formEntrada');
 const error = document.getElementById('error');
 
@@ -30,7 +31,7 @@ function comprobarForm (event) {
         return false;
     }
     //Informacion es correcta
-    datosUsuario(nickInput);
+    datosUsuario(nickInput, tamanoInput, emailInput);
     historicoUsuarios (nickInput);
     return true;
 }

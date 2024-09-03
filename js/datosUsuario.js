@@ -2,14 +2,19 @@
 //JS para la gestion de datos de usuario
 
 var nick;
+var tamano;
+var email;
 
-function datosUsuario(nick){
+function datosUsuario(nick, tamano, email){
     sessionStorage.setItem('nick', nick.value);
+    sessionStorage.setItem('tamano', tamano.value);
+    sessionStorage.setItem('email', email.value);
 }
 
 function getDatosUsuario(){
     nick = sessionStorage.getItem('nick');
-    console.log(nick);
+    tamano = sessionStorage.getItem('tamano');
+    email = sessionStorage.getItem('email');
 }
 
 function comprobacionDatosUsuario(){
