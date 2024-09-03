@@ -1,6 +1,4 @@
 
-
-
 //Capturamos datos de usuario
 getDatosUsuario();
 //Comprobamos los datos
@@ -9,4 +7,4 @@ if (!comprobacionDatosUsuario()){
         location = "index.html";
     }, 100);
 } 
-console.log(comprobarDatosUsuario());
+console.log(comprobacionDatosUsuario());
