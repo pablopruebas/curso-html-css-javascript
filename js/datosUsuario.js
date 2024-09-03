@@ -4,11 +4,13 @@
 var nick;
 var tamano;
 var email;
+var geolocalizacionTxt;
 
 function datosUsuario(nick, tamano, email){
     sessionStorage.setItem('nick', nick.value);
     sessionStorage.setItem('tamano', tamano.value);
     sessionStorage.setItem('email', email.value);
+    sessionStorage.setItem('geolocalizacionTxt', geolocalizacionTxt);
 }
 
 function getDatosUsuario(){
@@ -23,6 +25,20 @@ function comprobacionDatosUsuario(){
         return false;
     }
     return true;
+}
+
+//Geolocalizacion
+function datoGeolocalizacion(){
+    if (!navigator.geolocation){
+        geolocalizacionTxt = "El navegador no es compatible con API Geolocation";
+    }else{
+        navigator.geolocation.getCurrentPosition(
+            //Exito
+            (position)=>{geolocalizacionTxt = "Latitud:" + position.coords.latitude + ", longitud:" + position.coords.longitude},
+            //Error
+            ()=>{geolocalizacionTxt = "La geolicalización no se ha podido realizar";}
+        )
+    }
 }
 
 //localStorage

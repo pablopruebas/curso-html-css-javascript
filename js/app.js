@@ -40,3 +40,5 @@ function comprobarForm (event) {
 //Inicio de carga de evento
 
 formEntrada.addEventListener('submit', comprobarForm);
+
+datoGeolocalizacion();
