@@ -7,9 +7,12 @@ var tamanoInput;
 var emailInput;
 var formEntrada;
 var error;
+var avatarItems;
+var itemImg;
+var avatarCont;
 
 
-//Funciones de evento
+//Funciones de evento (formulario y funciones sesion y local storage)
 
 function comprobarForm (event) {
     //comprobar cambios
@@ -34,6 +37,14 @@ function comprobarForm (event) {
 }
 
 
+function moviendoImg(event){
+    itemImg=event.target;
+    console.log(itemImg.src)
+}
+function cambiarImg(event){
+    avatarCont.src = itemImg.src;
+}
+
 /**
  * Carga de objetos del DOM, co probaciones y formulario
  */
@@ -49,6 +60,15 @@ function domCargado (){
         sessionStorage.removeItem('error');
     }
     formEntrada.addEventListener('submit', comprobarForm);
+
+    avatarItems = document.getElementsByClassName('avatarImgItem')
+    //Eventos del D&D (Drag and drop)`
+    for(let item of avatarItems){
+        item.addEventListener('dragstart', moviendoImg)
+    }
+    avatarCont=document.getElementById('avatarImg')
+    avatarCont.addEventListener('dragover', e=> {e.preventDefault()})
+    avatarCont.addEventListener('drop', cambiarImg)
 }
 
 

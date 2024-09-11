@@ -3,10 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css">
     <title>Juego</title>
 </head>
 <body>
-    <h2>Juego MASTERDOTS</h2>
+    <main>
+        <div id="contenedorJuego">
+            <div id="juego">
+                <div class="containerItem"><div class="item"></div></div>
+                <div class="containerItem"><div class="item"></div></div>
+                <div class="containerItem"><div class="item"></div></div>
+                <div class="containerItem"><div class="item"></div></div>
+                <div class="containerItem"><div class="item"></div></div>
+                <div class="containerItem"><div class="item"></div></div>
+                <div class="containerItem"><div class="item"></div></div>
+                <div class="containerItem"><div class="item"></div></div>
+                <div class="containerItem"><div class="item"></div></div>
+
+            </div>
+            <div id="tituloJuego">
+                <p>MASTERDOTS</p>
+            </div>
+        </div>
+        <div id="contenedorUsuario">
+            <form id="form_entrada" action="juego.html">
+                <div class="itemform">
+                    <img src="./img/avatar1.png" width="26">
+                    <input type="text" id="nick" value="nick" readonly>
+                </div>
+                <div class="itemform">
+                    <label for="puntuacion">puntuacion</label>
+                    <input type="text" id="puntuacion" value="0"  class="inputJuego" readonly>
+                </div>
+                <div class="itemform">
+                    <label for="tmpo">tiempo restante</label>
+                    <input type="text" id="tmpo" value="30" class="inputJuego" readonly>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer>
+        Curso Frontend JS, HTML y CSS
+    </footer>
     <script src="./js/datosUsuario.js"></script>
     <script src="./js/juego.js" defer></script>
 </body>
