@@ -5,6 +5,7 @@
 //VARIABLES GLOBALES
 var iniciadoMarcado = false;
 var adyacentes=[];
+var idMarcados=[];
 var classMarcada;
 var tamanoPanel;
 
@@ -95,8 +96,9 @@ function comenzarMarcar(event){
         containerItem.classList.add('verde');
         classMarcada = 'verde';
     }
-    containerItem.classList.add()
     if(!iniciadoMarcado) iniciadoMarcado = true;
+    //Guardo los marcados
+    idMarcados.push(parseInt(item.id));
     //Comienzo a calcular adyacentes
     calcularAdyacentes(parseInt(item.id));
     console.log('se ha pinchado sobre un círculo')
@@ -114,7 +116,9 @@ function continuarMarcando(event){
         if (adyacentes.includes(idNuevo)&&item.classList.contains(classMarcada)){
             let containerItem = event.target.parentElement;
             if(item.classList.contains('rojo')) containerItem.classList.add('rojo');
-            else containerItem.classList.add('verde')
+            else containerItem.classList.add('verde');
+            //Guardo los marcados
+            idMarcados.push(parseInt(item.id));
             calcularAdyacentes(parseInt(item.id));
         }
     }
@@ -128,6 +132,25 @@ function continuarMarcando(event){
  */
 function finalizarMarcado(event){
     iniciadoMarcado=false;
+    adyacentes = [];
+    //Añadimos puntuacion
+    const puntuacionInput = document.getElementById('puntuacion');
+    if (idMarcados.length>1){
+        puntuacionInput.value=parseInt(puntuacionInput.value)+idMarcados.length
+    }
+    //Trabajar con los marcados
+    for (let index = 0; index < idMarcados.length; index++) {
+        //Capturar el objeto
+        let itemMarcado = document.getElementById(idMarcados[index]);
+        itemMarcado.parentElement.classList.remove(classMarcada);
+        //Cambiar el color de los objetos de forma random
+        let color=['rojo', 'verde'];
+        let colorRnd=getRandomInt(2);
+        itemMarcado.classList.remove(classMarcada);
+        itemMarcado.classList.add(color[colorRnd]);
+        
+    }
+    idMarcados = [];
     console.log('Finalizar el marcado');
 }
 
