@@ -2,6 +2,10 @@
  * Js del juego.html
  */
 
+//VARIABLES GLOBALES
+var iniciadoMarcado = false;
+var adyacentes=[];
+var tamanoPanel;
 
 function getRandomInt (max){
     return Math.floor(Math.random() * max);
@@ -14,6 +18,7 @@ function getRandomInt (max){
 function rellenarFormularioUsuario(){
     document.getElementById('nick').value = nick;
     document.getElementById('avatarImg').src = avatarImg;
+    tamanoPanel = parseInt(tamano);
 }
 
 /**
@@ -28,12 +33,100 @@ function pintarPanelJuego(){
     let colorRnd = 0;
     for (let index = 0; index < (parseInt(tamano)*parseInt(tamano)); index++) {
         if (index%2>0) colorRnd = getRandomInt(2);
-        items+= `<div class="containerItem"><div class="item ${color[colorRnd]}"></div></div>`
+        items+= `<div class="containerItem"><div id="${index}" class="item ${color[colorRnd]}"></div></div>`
         
     }
     document.getElementById('juego').innerHTML = items;
     console.log(items)
 }
+
+
+/**
+ * Calcula el array de los adyacentes
+ * @param {*} idMarcado 
+ */
+function calcularAdyacentes(idMarcado){
+    adyacentes=[]
+    //Adyacente superior
+    if ((idMarcado-tamanoPanel)>=0) adyacentes.push(idMarcado-tamanoPanel);
+    //Adyacente inferior
+    if ((idMarcado+tamanoPanel)<(tamanoPanel*tamanoPanel)) adyacentes.push(idMarcado+tamanoPanel);
+    //Adyacente izquierda
+    if ((idMarcado%tamanoPanel)>0) adyacentes.push(idMarcado-1);
+    //Adyacente derecha
+    if (((idMarcado+1)%tamanoPanel)>0) adyacentes.push(idMarcado+1);
+
+    for (let index = 0; index < adyacentes.length; index++) {
+        console.log(adyacentes);
+        
+        
+    }
+}
+
+
+/**
+ * Añadir los eventos al juego
+ */
+function programarEventosJuego(){
+    const items = document.getElementsByClassName('item')
+    for (let item of items){
+        item.addEventListener('mousedown', comenzarMarcar);
+        item.addEventListener('mouseover', continuarMarcando);
+    }
+    document.addEventListener('mouseup', finalizarMarcado);
+}
+
+
+/*FUNCIONES DEL JUEGO*/
+
+/**
+ * Iniciar el marcado de los dots
+ * @param {*} event 
+ */
+function comenzarMarcar(event){
+    let item = event.target;
+    let containerItem = event.target.parentElement;
+    if(item.classList.contains('rojo')) containerItem.classList.add('rojo');
+    else containerItem.classList.add('verde')
+    containerItem.classList.add()
+    if(!iniciadoMarcado) iniciadoMarcado = true;
+    console.log('se ha pinchado sobre un círculo')
+}
+
+/**
+ * Continuar marcado de los dots
+ * @param {*} event 
+ */
+function continuarMarcando(event){
+    if (iniciadoMarcado){
+        let item = event.target;
+        let containerItem = event.target.parentElement;
+        if(item.classList.contains('rojo')) containerItem.classList.add('rojo');
+        else containerItem.classList.add('verde')
+        containerItem.classList.add();
+
+        //test
+        calcularAdyacentes(parseInt(item.id))
+    }
+    console.log('Pasando sobre un circulo');
+}
+
+
+/**
+ * Finalizar el marcado de los dots
+ * @param {*} event 
+ */
+function finalizarMarcado(event){
+    iniciadoMarcado=false;
+    console.log('Finalizar el marcado');
+}
+
+
+
+
+/**
+ * MAIN
+ */
 
 
 //Capturamos datos de usuario
@@ -54,3 +147,4 @@ console.log(comprobacionDatosUsuario());
 //Rellenamos el formulario
 rellenarFormularioUsuario();
 pintarPanelJuego()
+programarEventosJuego()
