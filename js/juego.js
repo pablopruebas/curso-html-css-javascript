@@ -5,6 +5,7 @@
 //VARIABLES GLOBALES
 var iniciadoMarcado = false;
 var adyacentes=[];
+var classMarcada;
 var tamanoPanel;
 
 function getRandomInt (max){
@@ -86,10 +87,18 @@ function programarEventosJuego(){
 function comenzarMarcar(event){
     let item = event.target;
     let containerItem = event.target.parentElement;
-    if(item.classList.contains('rojo')) containerItem.classList.add('rojo');
-    else containerItem.classList.add('verde')
+    if(item.classList.contains('rojo')){
+        containerItem.classList.add('rojo');
+        classMarcada = 'rojo';
+    }
+    else{
+        containerItem.classList.add('verde');
+        classMarcada = 'verde';
+    }
     containerItem.classList.add()
     if(!iniciadoMarcado) iniciadoMarcado = true;
+    //Comienzo a calcular adyacentes
+    calcularAdyacentes(parseInt(item.id));
     console.log('se ha pinchado sobre un círculo')
 }
 
@@ -100,13 +109,14 @@ function comenzarMarcar(event){
 function continuarMarcando(event){
     if (iniciadoMarcado){
         let item = event.target;
-        let containerItem = event.target.parentElement;
-        if(item.classList.contains('rojo')) containerItem.classList.add('rojo');
-        else containerItem.classList.add('verde')
-        containerItem.classList.add();
-
-        //test
-        calcularAdyacentes(parseInt(item.id))
+        let idNuevo = parseInt(item.id);
+        //Es adyacente?
+        if (adyacentes.includes(idNuevo)&&item.classList.contains(classMarcada)){
+            let containerItem = event.target.parentElement;
+            if(item.classList.contains('rojo')) containerItem.classList.add('rojo');
+            else containerItem.classList.add('verde')
+            calcularAdyacentes(parseInt(item.id));
+        }
     }
     console.log('Pasando sobre un circulo');
 }
